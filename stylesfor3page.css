@@ -129,11 +129,11 @@
   /* Sign Up Page Styles */
 .signup-container {
     display: flex;
-    width: 90%;
+    width: 80%;
     margin: 20px auto;
     background-color: white;
     border-radius: 10px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
