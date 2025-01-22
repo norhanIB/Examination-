@@ -13,18 +13,24 @@
       <p>Join us to start your online exam journey.</p>
       <form action="login.html" class="signup-form">
         <label for="Firstname">Firstname</label>
-        <input type="text" id="username" name="Firstname" placeholder="Enter your Firstname"  class="Fname">
-        <span class="Error" style="color: red;"></span>
+        <input type="text"  name="Firstname" placeholder="Enter your Firstname"  class="Fname">
+        <span class="fnameError" style="color: red;"></span>
+
         <label for="Lastname">Lastname</label>
-        <input type="text" id="username" name="Lastname" placeholder="Enter your Lastname"  class="Lname" >
+        <input type="text"  name="Lastname" placeholder="Enter your Lastname"  class="Lname" >
+        <span class="lnameError" style="color: red;"></span>
         
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="Enter your email"  class="email" >
+        <span class="mailError" style="color: red;"></span>
         
         <label for="password">Password</label>
-        <input type="text" id="password" name="password" placeholder="Enter your password"  class="password" >
+        <input type="password" id="password" name="password" placeholder="Enter your password"  class="password" >
+        <span class="passError" style="color: red;"></span>
+
         <label for="password"> Confirm Password</label>
-        <input type="text" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" >
+        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" class="confirmpassword">
+        <span class="confirmPassError" style="color: red;"></span>
         
         <button type="submit" class="btn-signup">Sign Up</button>
       </form>
