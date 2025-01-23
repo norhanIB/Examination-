@@ -133,7 +133,6 @@
     margin: 20px auto;
     background-color: white;
     border-radius: 10px;
-    /* overflow: hidden; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -304,9 +303,5 @@
     border: none;
     cursor: pointer;
     text-align: center;
-  }
-  
-  .btn-start:hover {
-    background-color: #28a745;
   }
   

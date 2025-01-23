@@ -22,9 +22,7 @@ console.log(form);
 // [A-Za-z\d@$!%*?&]{8,}: Ensures the password is at least 8 characters long and contains only allowed characters.
 
 form.addEventListener("submit", function(e){
-   
     
-    //  e.preventDefault();
     fnameValidation(e);
     lnameValidation(e);
     mailValidation(e);
@@ -34,9 +32,11 @@ form.addEventListener("submit", function(e){
 
 function fnameValidation(e){
     if(fname.value == ""){
+        e.preventDefault();
         fnameError.innerHTML = "This field is required";
 
     }else if(isFinite(fname.value)){
+        e.preventDefault();
         fnameError.innerHTML = "This field required characters only"
     }else{
         fnameError.style.display = "none";
@@ -45,12 +45,12 @@ function fnameValidation(e){
 
 function lnameValidation(e){
     if(lname.value == ""){
-
+        e.preventDefault();
         lnameError.innerHTML = "This field is required";
       console.log(lnameError);
       
     }else if(isFinite(lname.value)){
- 
+        e.preventDefault();
         lnameError.innerHTML = "This field required characters only"
     }else{
         lnameError.style.display = "none";
@@ -60,10 +60,11 @@ function lnameValidation(e){
 
 function mailValidation(e){
     if(email.value == ""){
-     
+        e.preventDefault();
         mailError.innerHTML = "This field is required";
 
     }else if(!mailPattern.test(email.value)){
+        e.preventDefault();
         mailError.innerHTML = "invalid mail address"
 
     }else{
