@@ -5,83 +5,91 @@ let email = document.querySelector('.email');
 let password = document.querySelector('.password');
 let confirmpass = document.querySelector(".confirmpassword")
 let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+let passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W]).{1,8}$/ ;
 let fnameError = document.querySelector(".fnameError")
 let lnameError = document.querySelector(".lnameError")
 let mailError = document.querySelector(".mailError")
 let passError = document.querySelector(".passError")
 let confirmPassError = document.querySelector(".confirmPassError")
-console.log(form);
-
-
-
-// passpattern /^ and $: Ensure the entire string is matched.
-// (?=.*[a-z]): At least one lowercase letter.
-// (?=.*[A-Z]): At least one uppercase letter.
-// (?=.*\d): At least one digit.
-// (?=.*[@$!%*?&]): At least one special character (you can adjust this set based on your requirements).
-// [A-Za-z\d@$!%*?&]{8,}: Ensures the password is at least 8 characters long and contains only allowed characters.
 
 form.addEventListener("submit", function(e){
+    let fError = fnameValidation()
+    let lError = lnameValidation()
+    let mError = mailValidation()
+    let pError = passwordValidation()
+    let cpError = confirmpassValidation()
+
+    if(!(fError && lError && mError && pError && cpError)){
+       e.preventDefault()
+    }else{localStorage.setItem("Fname",fname.value)
+    localStorage.setItem("Lname",lname.value)
+    localStorage.setItem("Email",email.value)
+    localStorage.setItem("Password",password.value) }
     
-    fnameValidation(e);
-    lnameValidation(e);
-    mailValidation(e);
-    }
-    
+}
 )
 
 function fnameValidation(e){
     if(fname.value == ""){
-        e.preventDefault();
         fnameError.innerHTML = "This field is required";
-
+        return false;
     }else if(isFinite(fname.value)){
-        e.preventDefault();
-        fnameError.innerHTML = "This field required characters only"
-    }else{
-        fnameError.style.display = "none";
+        fnameError.innerHTML = "This field required characters only";
+        return false;
     }
+    fnameError.style.display = "none";
+    return true;
 }
 
 function lnameValidation(e){
     if(lname.value == ""){
-        e.preventDefault();
         lnameError.innerHTML = "This field is required";
-      console.log(lnameError);
-      
+        return false;
     }else if(isFinite(lname.value)){
-        e.preventDefault();
-        lnameError.innerHTML = "This field required characters only"
-    }else{
-        lnameError.style.display = "none";
+        lnameError.innerHTML = "This field required characters only";
+        return false;
     }
+    lnameError.style.display = "none";
+    return true;
 }
-
 
 function mailValidation(e){
     if(email.value == ""){
-        e.preventDefault();
         mailError.innerHTML = "This field is required";
-
+        return false;
     }else if(!mailPattern.test(email.value)){
-        e.preventDefault();
         mailError.innerHTML = "invalid mail address"
-
-    }else{
-        mailError.style.display = "none";
+        return false;
     }
+    mailError.style.display = "none";
+    return true;
 }
 
 function passwordValidation(e){
-    if(password.value.length < 8){
-        passError.innerHTML = "The password length must not be less than 8"
+    if(password.value == ""){
+        passError.innerHTML = "This field is required";
+        return false;
+    }else if(!passwordPattern.test(password.value)){
+        passError.innerHTML = "password requires at least one uppercase letter,</br>at least one lowercase letter, at least one special character</br>and max 8 characters"
+        return false;
     }
+    passError.style.display = "none";
+    return true;
 }
 
-// function  passwordValidation(e){
-//     if(password.value == ""){
-//         e.preventDefault(e)
-//         passError.innerHTML = "This field is required"
-//     }if()
-// }
+function confirmpassValidation(e){
+    if(confirmpass.value == ""){
+        confirmPassError.innerHTML = "This field is required";
+        return false;
+    }else
+    if(confirmpass.value !== password.value ){
+        confirmPassError.innerHTML = "Password dosn't match"
+        return false;
+    }
+    confirmPassError.style.display = "none";
+    return true;
+}
+
+
+
 
