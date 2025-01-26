@@ -4,6 +4,8 @@ let examAnwers = document.querySelector(".answers")
 let nxt = document.querySelector(".next")
 let prev = document.querySelector(".prev")
 let showCount = document.querySelector(".count span")
+let timer = document.querySelector(".timer")
+let submitBtn = document.querySelector(".submit")
 
 let currentIndex = 0;
 
@@ -13,7 +15,7 @@ fetch('../frontend_questions.json')
   let questionCount = question.length
   
   displayQuestion(question[currentIndex], questionCount) 
-
+  //next button event
   nxt.addEventListener("click", function(){
     if(currentIndex < questionCount-1){
       currentIndex++;
@@ -22,20 +24,29 @@ fetch('../frontend_questions.json')
       displayQuestion(question[currentIndex], questionCount)
     }
   })
-
+  //previous event
   prev.addEventListener("click", function(){
-    if(currentIndex > 0 )
-    currentIndex--;
-    examQuestions.innerHTML = "";
-      examAnwers.innerHTML = "";
-      displayQuestion(question[currentIndex], questionCount)
+    prevButton()
+    displayQuestion(question[currentIndex], questionCount)
   })
+  //Timer
+  // countDwon(600, 20);
+  //Random
+  suffle(question);
+
+  // submitExam(questionCount);
 }).catch(()=>document.write(`<h1> error loading data</h1>`))
 
-
-function displayQuestion(questions, count){
-  showCount.innerHTML = currentIndex+1;
-  // if(currentIndex < count){
+//previous Button func
+function prevButton(){
+  if(currentIndex > 0 )
+    currentIndex--;
+    examQuestions.innerHTML = "";
+    examAnwers.innerHTML = "";    
+}
+//display data (Q&A)
+function displayQuestion(questions){
+   showCount.innerHTML = currentIndex+1;
 
     //question
     let questionTitle = document.createElement("h2")
@@ -63,45 +74,49 @@ function displayQuestion(questions, count){
 
       examAnwers.append(answerDiv)
     });
-
-  // }
 }
 
+//Timer
+function countDwon(duration, count){
+  if(currentIndex < count){
+    let minutes;
+    let seconds;
+    timerInterval = setInterval(() => {
+      minutes = parseInt(duration / 60);
+      seconds = parseInt(duration % 60);
+      minutes = minutes < 10 ? `0${minutes}` : minutes;
+      seconds = seconds < 10 ? `0${seconds}` : seconds;
+      timer.innerHTML = `${minutes}:${seconds}`;
 
+      if(--duration < 0 ){
+        clearInterval(timerInterval);
+        close(`htmlpages/exam.html`);
+        open("../htmlpages/timeout.html");
+      }
+    }, 1000);
+  }
+}
 
+//Randomization
+function suffle(questions){
+  console.log(questions);
+  let index = questions.length
+  while(index != 0){
+    let randomIndex = Math.floor(Math.random() * index);
+    index--;
+    [questions[index], questions[randomIndex]] = 
+    [questions[randomIndex], questions[index]];
+  }
 
+  
+}
 
+// function submitExam(count){
+//   if(currentIndex = count){
+//     submitBtn.addEventListener("click", function(){
 
-
-// function  displayQuestion(question){
-//     let quizBlock = document.querySelector(".block")
-//      question.forEach(item => {
-//         let questionBlock = document.createElement("div")
-//           questionBlock.classList.add("question");
-
-//          // Add the question title
-//          let questionTitle = document.createElement('div');
-//         //  questionTitle.classList.add('question-title');
-//          questionTitle.textContent = `Q${item.id}: ${item.question}`;
-//          questionBlock.appendChild(questionTitle);
-
-        
-         
-//          let optionsList = document.createElement('div');
-//         //   optionsList.classList.add('options');
-//          item.options.forEach(option => {
-//             let divAns = document.createElement("div")
-//             divAns.innerHTML = "<input type='radio'> "+option+" </input>"
-//             console.log(divAns);
-            
-//             //  let optionItem = document.createElement('input');
-//             //  optionItem.textContent = option;
-//               optionsList.appendChild(divAns);
-//          });
-
-//          questionBlock.appendChild(optionsList);
-
-//          quizBlock.appendChild(questionBlock);
-//      });
+//     })
+//   }
 // }
+
 
