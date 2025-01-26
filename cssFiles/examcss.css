@@ -7,6 +7,7 @@ body {
 .exambackground {
     padding: 15px 30px;
     width: 97%;
+    
     /* height: 200vh; */
 
     /* background-image: linear-gradient(to bottom right, rgb(6, 6, 92), rgb(83, 3, 94)); */
@@ -23,6 +24,7 @@ button {
 
 }
 .examblock {
+    position: relative;
     margin: 50px;
     background-color: white;
     padding: 15px;
@@ -55,3 +57,23 @@ button {
     justify-content: space-around;
     align-items: center;
 }
+.timer {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+  }
+
+  .timer span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5f5ce0;
+  }
