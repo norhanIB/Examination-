@@ -8,17 +8,23 @@ let timer = document.querySelector(".timer")
 let submitBtn = document.querySelector(".submit")
 
 let currentIndex = 0;
+let rightAnwers = 0;
+let result;
 
 fetch('../frontend_questions.json')
 .then(response => response.json()  )
 .then(question => {
   let questionCount = question.length
-  
+  // passingExam(questionCount);
   displayQuestion(question[currentIndex], questionCount) 
   //next button event
   nxt.addEventListener("click", function(){
     if(currentIndex < questionCount-1){
+      let therightAns = question[currentIndex].answer;
+      
       currentIndex++;
+      //check answer
+      checkAnswer(therightAns)
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = "";
       displayQuestion(question[currentIndex], questionCount)
@@ -31,10 +37,11 @@ fetch('../frontend_questions.json')
   })
   //Timer
   // countDwon(600, 20);
+
   //Random
   suffle(question);
 
-  // submitExam(questionCount);
+  submitExam(questionCount);
 }).catch(()=>document.write(`<h1> error loading data</h1>`))
 
 //previous Button func
@@ -63,6 +70,7 @@ function displayQuestion(questions){
       radio.name = "question";
       radio.type = "radio";
       radio.id = `${index}`;
+      radio.dataset.answer = `${option}`;
 
       let label = document.createElement("label")
       label.classList.add("label")
@@ -99,7 +107,6 @@ function countDwon(duration, count){
 
 //Randomization
 function suffle(questions){
-  console.log(questions);
   let index = questions.length
   while(index != 0){
     let randomIndex = Math.floor(Math.random() * index);
@@ -111,12 +118,55 @@ function suffle(questions){
   
 }
 
-// function submitExam(count){
-//   if(currentIndex = count){
-//     submitBtn.addEventListener("click", function(){
+//Check Answers
+function checkAnswer(rightAns){
+  console.log(rightAns);
+  let answers = document.getElementsByName("question");
+  let choosenAnswer;
+  
+  console.log(answers);
+  
+  
+  for(let i = 0; i < answers.length; i++){
+    if(answers[i].checked){
+      choosenAnswer = answers[i].dataset.answer;
+    }
+  }
+  console.log(choosenAnswer);
+  if(rightAns === choosenAnswer){
+    rightAnwers++;
+  }
+}
 
-//     })
+// function passingExam(count){
+//   console.log(count);
+//   if(rightAnwers > count /2 && rightAnwers < count){
+//     result = `<span>Good Job ${localStorage.getItem("fname")}. You Get ${rightAnwers} From ${count}</span>`;
+//   }else if(rightAnwers === count){
+//     result = `<span> Perfect ${localStorage.getItem("fname")}. You Get ${rightAnwers} From ${count}</span>`
 //   }
 // }
+
+
+// function failedExam(count){
+//   if(rightAnwers < count){
+//     result =`<p>You Get ${rightAnwers} From ${count} </br>It's Okay. Stupider than you and they arrived, Try Again</p>`
+//   }
+// }
+
+
+function submitExam(count){
+  if(currentIndex = count){
+    submitBtn.addEventListener("click", function(){
+      if(rightAnwers > count /2 && rightAnwers < count || rightAnwers === count){
+        close(`htmlpages/exam.html`);
+        open("../htmlpages/passExam.html"); 
+      }else{
+        close(`htmlpages/exam.html`);
+        open("../htmlpages/failExam.html");
+      }
+    })
+  }
+}
 
 
