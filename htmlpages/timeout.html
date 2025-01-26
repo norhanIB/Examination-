@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Out</title>
+<link rel="stylesheet" href="../cssFiles/timeout.css">
+</head>
+<body>
+  <!-- <div class="logo">logo</div> -->
+  <div class="container">
+    <div class="message">
+      <h1>Sorry, your time is out</h1>
+      <p>The allowed time for this exam has expired try again</p>
+    </div>
+    <div class="score">Your Score: <span id="score">0</span></div>
+    <div class="clock">
+      <span>00:00</span>
+    </div>
+    <a href="home.html" class="home-button">Go to Home</a>
+  </div>
+
+  <script>
+
+    const score = 85;
+    document.getElementById('score').textContent = score;
+  </script>
+</body>
+</html>

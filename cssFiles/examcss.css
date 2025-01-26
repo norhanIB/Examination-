@@ -1,33 +1,40 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
+
 }
 .exambackground {
     padding: 15px 30px;
     width: 97%;
-    height: 200vh;
-    background-image: linear-gradient(to bottom right, rgb(6, 6, 92), rgb(83, 3, 94));
+    /* height: 200vh; */
+
+    /* background-image: linear-gradient(to bottom right, rgb(6, 6, 92), rgb(83, 3, 94)); */
 }
 
 button {
     cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 20px;
+    background-color: #5f5ce0;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
     border: 0;
+
 }
 .examblock {
     margin: 50px;
-    background-color: aliceblue;
+    background-color: white;
     padding: 15px;
     border-radius: 15px;
-    box-shadow: 0px 0px 5px 10px rgb(179, 201, 221);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .info, .control {
     display: flex;
     padding: 15px;
     border-radius: 15px;
-    background-color: rgb(193, 208, 221);
+    /* background-color: rgb(193, 208, 221); */
 }
 .qyestions {
     padding-left: 20px;
