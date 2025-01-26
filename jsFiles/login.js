@@ -25,7 +25,10 @@ form.addEventListener("click", function(e){
         if(mail.value === emailLocal && pass.value === passwordLocal){
             isvisible = true;
             console.log("rew");
-            return true;
+            window.location.href = '../htmlpages/home.html';
+
+         return true;
+            
         }else{
             
             isvisible = false

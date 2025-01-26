@@ -25,6 +25,7 @@ form.addEventListener("submit", function(e){
     localStorage.setItem("Lname",lname.value)
     localStorage.setItem("Email",email.value)
     localStorage.setItem("Password",password.value) }
+    handleSignUpSuccess()
     
 }
 )
@@ -90,6 +91,20 @@ function confirmpassValidation(e){
     return true;
 }
 
+///لما يعمل ساين اب ميعرفش يرجع تاني 
+window.onload = function () {
+    
+    if (localStorage.getItem('registered') === 'true') {
+    
+        window.location.href = '../htmlpages/login.html';
+    }
+};
 
 
+function handleSignUpSuccess() {
+console.log("hello");
 
+    localStorage.setItem('registered', 'true');
+
+    window.location.href = '../htmlpages/login.html';
+}
