@@ -13,7 +13,7 @@ body {
     /* background-image: linear-gradient(to bottom right, rgb(6, 6, 92), rgb(83, 3, 94)); */
 }
 
-button {
+.prev,.next, .submit {
     cursor: pointer;
     background-color: #5f5ce0;
     color: white;

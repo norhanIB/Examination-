@@ -15,45 +15,37 @@ fetch('../frontend_questions.json')
 .then(response => response.json()  )
 .then(question => {
   let questionCount = question.length
-  
-  //next button event
-  
   //Timer
   // countDwon(600, 20);
 
-  //Random
-  // let questionUser =  suffle(question);
-
+  // Random
+  let questionUser =  suffle(question);
   console.log(questionUser)
 
-  displayQuestion(question[currentIndex]) 
-
+  displayQuestion(questionUser[currentIndex]) 
+  //next button
   nxt.addEventListener("click", function(){
+    console.log("nm");
+    
     if(currentIndex < questionCount - 1){
       // let therightAns = question[currentIndex].answer;
-      console.log(currentIndex);
-      
       currentIndex++;
       //check answer
       // checkAnswer(therightAns)
-
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = "";
-      displayQuestion(question[currentIndex])
+      displayQuestion(questionUser[currentIndex]);
     }
   })
-  //previous event
+  //previous button
   prev.addEventListener("click", function(){
-    prevButton()
-    // if(currentIndex > 0 )
-    //   currentIndex--;
-    //   examQuestions.innerHTML = "";
-    //   examAnwers.innerHTML = "";  
-    displayQuestion(question[currentIndex])
+    prevButton() 
+    displayQuestion(questionUser[currentIndex])
   })
+  //submit
   submitExam(questionCount);
 })
-// .catch(()=>document.write(`<h1> error loading data</h1>`))
+.catch(()=>document.write(`<h1> error loading data</h1>`))
 
 //previous Button func
 function prevButton(){
@@ -129,7 +121,7 @@ function suffle(questions){
   let randomeIndexCheck = new Set();
 
   while(index < questions.length){
-    let randomIndex = Math.floor(Math.random() * index);
+    let randomIndex = Math.floor(Math.random() * questions.length);
     if(!randomeIndexCheck.has(randomIndex)){
       shuffleQuestion.push(questions[randomIndex]) 
       randomeIndexCheck.add(randomIndex);
@@ -184,7 +176,9 @@ let userAnswer = [];
 
 
 function submitExam(count){
-  if(currentIndex = count){
+ 
+  
+  
     submitBtn.addEventListener("click", function(){
       if(rightAnwers > count /2 && rightAnwers < count || rightAnwers === count){
         close(`htmlpages/exam.html`);
@@ -194,7 +188,7 @@ function submitExam(count){
         open("../htmlpages/failExam.html");
       }
     })
-  }
+
 }
 
 
