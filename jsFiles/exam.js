@@ -18,19 +18,7 @@ icon.addEventListener("click", function(){
 
 })
 
-let flaggedQuestions = new Set();
 
-function toggleFlag(questionId) {
-  const questionElement = document.querySelector(`.question[data-id="${questionId}"]`);
-
-  // Toggle flag status
-  if (flaggedQuestions.has(questionId)) {
-    flaggedQuestions.delete(questionId);
-  } else {
-    flaggedQuestions.add(questionId);
-  }
-  updateFlaggedList();
-}
 function updateFlaggedList() {
   const flaggedList = document.getElementById('flagged-list');
   flaggedList.innerHTML = '';
