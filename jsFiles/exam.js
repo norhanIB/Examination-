@@ -22,13 +22,14 @@ icon.addEventListener("click", function(){
 function updateFlaggedList() {
   const flaggedList = document.getElementById('flagged-list');
   flaggedList.innerHTML = '';
-
+//  console.log(flaggedQuestions);
   flaggedQuestions.forEach(questionId => {
     const listItem = document.createElement('li');
     listItem.textContent = `Question ${questionId}`;
     flaggedList.appendChild(listItem);
   });
 }
+
 /////////////////////////////////////////////////////////////////
 
 let currentIndex = 0;
@@ -47,6 +48,8 @@ fetch('../frontend_questions.json')
   console.log(questionUser)
 
   displayQuestion(questionUser[currentIndex]) 
+  // updateFlaggedList();
+  // updateFlaggedList();
   //next button
   nxt.addEventListener("click", function(){
     console.log("nm");
@@ -200,9 +203,6 @@ let userAnswer = [];
 
 
 function submitExam(count){
- 
-  
-  
     submitBtn.addEventListener("click", function(){
       if(rightAnwers > count /2 && rightAnwers < count || rightAnwers === count){
         close(`htmlpages/exam.html`);
@@ -212,7 +212,6 @@ function submitExam(count){
         open("../htmlpages/failExam.html");
       }
     })
-
 }
 
 
