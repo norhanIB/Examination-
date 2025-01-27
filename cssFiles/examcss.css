@@ -57,7 +57,7 @@ body {
     justify-content: space-around;
     align-items: center;
 }
-.timer {
+ .timer {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -70,10 +70,28 @@ body {
     height: 100px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
-  }
-
-  .timer span {
     font-size: 24px;
     font-weight: bold;
     color: #5f5ce0;
+  } 
+
+ .hidden{
+    display:none;
+ }
+ 
+ .flagged-questions {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .flagged-questions h3 {
+    margin-bottom: 10px;
+  }
+  
+  .flagged-questions ul {
+    list-style: none;
+  }
+  
+  .flagged-questions li {
+    margin-bottom: 5px;
   }

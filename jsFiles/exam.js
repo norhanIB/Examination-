@@ -6,6 +6,42 @@ let prev = document.querySelector(".prev")
 let showCount = document.querySelector(".count span")
 let timer = document.querySelector(".timer")
 let submitBtn = document.querySelector(".submit")
+let flag=document.querySelector(".flag")
+let filflag=document.querySelector(".fillflag")
+let icon=document.querySelector(".icon")
+
+
+//////////////////flag function////////////////////////////////////
+icon.addEventListener("click", function(){
+  filflag.classList.toggle('hidden');
+  flag.classList.toggle('hidden');
+
+})
+
+let flaggedQuestions = new Set();
+
+function toggleFlag(questionId) {
+  const questionElement = document.querySelector(`.question[data-id="${questionId}"]`);
+
+  // Toggle flag status
+  if (flaggedQuestions.has(questionId)) {
+    flaggedQuestions.delete(questionId);
+  } else {
+    flaggedQuestions.add(questionId);
+  }
+  updateFlaggedList();
+}
+function updateFlaggedList() {
+  const flaggedList = document.getElementById('flagged-list');
+  flaggedList.innerHTML = '';
+
+  flaggedQuestions.forEach(questionId => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `Question ${questionId}`;
+    flaggedList.appendChild(listItem);
+  });
+}
+/////////////////////////////////////////////////////////////////
 
 let currentIndex = 0;
 let rightAnwers = 0;
@@ -16,7 +52,7 @@ fetch('../frontend_questions.json')
 .then(question => {
   let questionCount = question.length
   //Timer
-  // countDwon(600, 20);
+   countDwon(600, 20);
 
   // Random
   let questionUser =  suffle(question);
