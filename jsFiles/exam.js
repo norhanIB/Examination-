@@ -15,34 +15,45 @@ fetch('../frontend_questions.json')
 .then(response => response.json()  )
 .then(question => {
   let questionCount = question.length
-  // passingExam(questionCount);
-  displayQuestion(question[currentIndex], questionCount) 
+  
   //next button event
+  
+  //Timer
+  // countDwon(600, 20);
+
+  //Random
+  // let questionUser =  suffle(question);
+
+  console.log(questionUser)
+
+  displayQuestion(question[currentIndex]) 
+
   nxt.addEventListener("click", function(){
-    if(currentIndex < questionCount-1){
-      let therightAns = question[currentIndex].answer;
+    if(currentIndex < questionCount - 1){
+      // let therightAns = question[currentIndex].answer;
+      console.log(currentIndex);
       
       currentIndex++;
       //check answer
-      checkAnswer(therightAns)
+      // checkAnswer(therightAns)
+
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = "";
-      displayQuestion(question[currentIndex], questionCount)
+      displayQuestion(question[currentIndex])
     }
   })
   //previous event
   prev.addEventListener("click", function(){
     prevButton()
-    displayQuestion(question[currentIndex], questionCount)
+    // if(currentIndex > 0 )
+    //   currentIndex--;
+    //   examQuestions.innerHTML = "";
+    //   examAnwers.innerHTML = "";  
+    displayQuestion(question[currentIndex])
   })
-  //Timer
-  // countDwon(600, 20);
-
-  //Random
-  suffle(question);
-
   submitExam(questionCount);
-}).catch(()=>document.write(`<h1> error loading data</h1>`))
+})
+// .catch(()=>document.write(`<h1> error loading data</h1>`))
 
 //previous Button func
 function prevButton(){
@@ -63,20 +74,26 @@ function displayQuestion(questions){
    
     //answer
     questions.options.forEach((option, index) => {
+      //div parent
       let answerDiv = document.createElement("div")
       answerDiv.classList.add("answers")
+      // input radio
       let radio = document.createElement("input")
       radio.classList.add("radio")
       radio.name = "question";
       radio.type = "radio";
       radio.id = `${index}`;
       radio.dataset.answer = `${option}`;
+      console.log();
+      radio.addEventListener('click' ,checkAnswer(questions.id))
 
+      // label
       let label = document.createElement("label")
       label.classList.add("label")
       label.htmlFor = `${index}`
       let labelText = document.createTextNode(`${option}`);      
       label.append(labelText)
+
       answerDiv.append(radio)
       answerDiv.append(label)
 
@@ -107,36 +124,47 @@ function countDwon(duration, count){
 
 //Randomization
 function suffle(questions){
-  let index = questions.length
-  while(index != 0){
+  let index = 0;
+  let shuffleQuestion = [];
+  let randomeIndexCheck = new Set();
+
+  while(index < questions.length){
     let randomIndex = Math.floor(Math.random() * index);
-    index--;
-    [questions[index], questions[randomIndex]] = 
-    [questions[randomIndex], questions[index]];
+    if(!randomeIndexCheck.has(randomIndex)){
+      shuffleQuestion.push(questions[randomIndex]) 
+      randomeIndexCheck.add(randomIndex);
+      index++;
+    }    // [questions[index], questions[randomIndex]] = [questions[randomIndex], questions[index]];
   }
 
+  return shuffleQuestion;
   
 }
 
 //Check Answers
-function checkAnswer(rightAns){
-  console.log(rightAns);
-  let answers = document.getElementsByName("question");
-  let choosenAnswer;
+// function checkAnswer(rightAns){
+//   console.log(rightAns);
+//   let answers = document.getElementsByName("question");
+//   let choosenAnswer;
   
-  console.log(answers);
+//   console.log(answers);
   
   
-  for(let i = 0; i < answers.length; i++){
-    if(answers[i].checked){
-      choosenAnswer = answers[i].dataset.answer;
-    }
-  }
-  console.log(choosenAnswer);
-  if(rightAns === choosenAnswer){
-    rightAnwers++;
-  }
+//   for(let i = 0; i < answers.length; i++){
+//     if(answers[i].checked){
+//       choosenAnswer = answers[i].dataset.answer;
+//     }
+//   }
+//   console.log(choosenAnswer);
+//   if(rightAns === choosenAnswer){
+//     rightAnwers++;
+//     localStorage.setItem("rightAnswer", rightAnwers)
+//   }
+// }
+function checkAnswer(index , rightAns){
+  userAnswer[index] = rightAns;
 }
+let userAnswer = [];
 
 // function passingExam(count){
 //   console.log(count);
