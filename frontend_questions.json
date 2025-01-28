@@ -10,7 +10,7 @@
         "id": 2,
         "question": "Which tag is used to add an image in HTML?",
         "options": ["img", "image", "pic", "src"],
-        "answer": "<img>"
+        "answer": "img"
     },
     {
         "id": 3,
@@ -22,7 +22,7 @@
         "id": 4,
         "question": "Which tag is used to create a link in HTML?",
         "options": ["link", "href", "a", "url"],
-        "answer": "<a>"
+        "answer": "a"
     },
     {
         "id": 5,

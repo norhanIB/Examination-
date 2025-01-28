@@ -11,11 +11,11 @@ let emailLocal = localStorage.getItem("Email")
 let passwordLocal = localStorage.getItem("Password")
 
 
-form.addEventListener("click", function(e){
+form.addEventListener("submit", function(e){
     e.preventDefault();
     let inputM = mailValidation(e);
     let inputP = passValidation(e);
-    let isvisible = false;
+    // let isvisible = false;
     if(inputM && inputP){
         console.log(mail.value);
         console.log(emailLocal);
@@ -23,7 +23,7 @@ form.addEventListener("click", function(e){
         console.log(passwordLocal);
         
         if(mail.value === emailLocal && pass.value === passwordLocal){
-            isvisible = true;
+            // isvisible = true;
             console.log("rew");
             window.location.href = '../htmlpages/home.html';
 
@@ -31,13 +31,13 @@ form.addEventListener("click", function(e){
             
         }else{
             
-            isvisible = false
+            // isvisible = false
             error.innerHTML = "incorect mail or password";
         }
         
     }
 
-    return isvisible;
+    // return isvisible;
     // if(mailValidation(e) && passValidation(e)){
     //     console.log(mail.value);
     //         console.log(emailLocal);

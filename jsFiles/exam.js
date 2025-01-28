@@ -6,91 +6,60 @@ let prev = document.querySelector(".prev")
 let showCount = document.querySelector(".count span")
 let timer = document.querySelector(".timer")
 let submitBtn = document.querySelector(".submit")
-let flag=document.querySelector(".flag")
-let filflag=document.querySelector(".fillflag")
-let icon=document.querySelector(".icon")
-
-
-//////////////////flag function////////////////////////////////////
-icon.addEventListener("click", function(){
-  filflag.classList.toggle('hidden');
-  flag.classList.toggle('hidden');
-
-})
-
-
-function updateFlaggedList() {
-  const flaggedList = document.getElementById('flagged-list');
-  flaggedList.innerHTML = '';
-//  console.log(flaggedQuestions);
-  flaggedQuestions.forEach(questionId => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `Question ${questionId}`;
-    flaggedList.appendChild(listItem);
-  });
-}
-
-/////////////////////////////////////////////////////////////////
 
 let currentIndex = 0;
-let rightAnwers = 0;
+let rightAnswers = 0;
 let result;
+let userAnswer = [];
+let questionUser = []
 
 fetch('../frontend_questions.json')
 .then(response => response.json()  )
 .then(question => {
   let questionCount = question.length
   //Timer
-   countDwon(600, 20);
+  // countDwon(600, 20);
 
   // Random
-  let questionUser =  suffle(question);
-  console.log(questionUser)
+  questionUser =  suffle(question);
 
+  //display Question
   displayQuestion(questionUser[currentIndex]) 
-  // updateFlaggedList();
-  // updateFlaggedList();
+
   //next button
   nxt.addEventListener("click", function(){
-    console.log("nm");
-    
     if(currentIndex < questionCount - 1){
-      // let therightAns = question[currentIndex].answer;
       currentIndex++;
-      //check answer
-      // checkAnswer(therightAns)
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = "";
-      displayQuestion(questionUser[currentIndex]);
+      displayQuestion(questionUser[currentIndex] );
     }
   })
+
   //previous button
   prev.addEventListener("click", function(){
-    prevButton() 
-    displayQuestion(questionUser[currentIndex])
+    if(currentIndex > 0 ){
+      currentIndex--;
+      examQuestions.innerHTML = "";
+      examAnwers.innerHTML = "";  
+      displayQuestion(questionUser[currentIndex])
+      console.log(userAnswer);
+      
+    }
   })
+  
   //submit
   submitExam(questionCount);
-})
-.catch(()=>document.write(`<h1> error loading data</h1>`))
+}).catch(()=>document.write(`<h1> error loading data</h1>`))
 
-//previous Button func
-function prevButton(){
-  if(currentIndex > 0 )
-    currentIndex--;
-    examQuestions.innerHTML = "";
-    examAnwers.innerHTML = "";    
-}
 //display data (Q&A)
-function displayQuestion(questions){
+function displayQuestion(questions ){
    showCount.innerHTML = currentIndex+1;
-
     //question
     let questionTitle = document.createElement("h2")
     let questionText = document.createTextNode(questions.question)
     questionTitle.append(questionText)
     examQuestions.append(questionTitle)
-   
     //answer
     questions.options.forEach((option, index) => {
       //div parent
@@ -103,21 +72,35 @@ function displayQuestion(questions){
       radio.type = "radio";
       radio.id = `${index}`;
       radio.dataset.answer = `${option}`;
-      console.log();
-      radio.addEventListener('click' ,checkAnswer(questions.id))
-
+  
       // label
       let label = document.createElement("label")
       label.classList.add("label")
       label.htmlFor = `${index}`
       let labelText = document.createTextNode(`${option}`);      
-      label.append(labelText)
-
+      label.append(labelText);
+      console.log(radio.dataset.answer)
+      console.log(index)
+      radio.setAttribute('onclick' , `saveAnswer(${currentIndex} , '${radio.dataset.answer}')`);
+      
       answerDiv.append(radio)
       answerDiv.append(label)
+      examAnwers.append(answerDiv);
 
-      examAnwers.append(answerDiv)
+      if(userAnswer[currentIndex] === option){
+        radio.checked = true;
+      }
     });
+}
+//Calc Right Answers
+function calculate () {
+  for (let i = 0; i < userAnswer.length; i++) {
+    if (userAnswer[i] === questionUser[i].answer) {
+      console.log(userAnswer[i] === questionUser[i].answer);
+      rightAnswers++
+    }
+  }
+  localStorage.setItem('grad' , (rightAnswers / questionUser.length * 100))
 }
 
 //Timer
@@ -146,72 +129,35 @@ function suffle(questions){
   let index = 0;
   let shuffleQuestion = [];
   let randomeIndexCheck = new Set();
-
   while(index < questions.length){
     let randomIndex = Math.floor(Math.random() * questions.length);
     if(!randomeIndexCheck.has(randomIndex)){
       shuffleQuestion.push(questions[randomIndex]) 
       randomeIndexCheck.add(randomIndex);
+      console.log(randomIndex);
+      
       index++;
-    }    // [questions[index], questions[randomIndex]] = [questions[randomIndex], questions[index]];
+    }  
   }
-
   return shuffleQuestion;
-  
+}
+//Save Answers
+function saveAnswer(index , answer){
+  userAnswer[index] = answer;
 }
 
-//Check Answers
-// function checkAnswer(rightAns){
-//   console.log(rightAns);
-//   let answers = document.getElementsByName("question");
-//   let choosenAnswer;
-  
-//   console.log(answers);
-  
-  
-//   for(let i = 0; i < answers.length; i++){
-//     if(answers[i].checked){
-//       choosenAnswer = answers[i].dataset.answer;
-//     }
-//   }
-//   console.log(choosenAnswer);
-//   if(rightAns === choosenAnswer){
-//     rightAnwers++;
-//     localStorage.setItem("rightAnswer", rightAnwers)
-//   }
-// }
-function checkAnswer(index , rightAns){
-  userAnswer[index] = rightAns;
-}
-let userAnswer = [];
-
-// function passingExam(count){
-//   console.log(count);
-//   if(rightAnwers > count /2 && rightAnwers < count){
-//     result = `<span>Good Job ${localStorage.getItem("fname")}. You Get ${rightAnwers} From ${count}</span>`;
-//   }else if(rightAnwers === count){
-//     result = `<span> Perfect ${localStorage.getItem("fname")}. You Get ${rightAnwers} From ${count}</span>`
-//   }
-// }
-
-
-// function failedExam(count){
-//   if(rightAnwers < count){
-//     result =`<p>You Get ${rightAnwers} From ${count} </br>It's Okay. Stupider than you and they arrived, Try Again</p>`
-//   }
-// }
-
-
+//Submit Button
 function submitExam(count){
     submitBtn.addEventListener("click", function(){
-      if(rightAnwers > count /2 && rightAnwers < count || rightAnwers === count){
-        close(`htmlpages/exam.html`);
-        open("../htmlpages/passExam.html"); 
-      }else{
-        close(`htmlpages/exam.html`);
-        open("../htmlpages/failExam.html");
-      }
-    })
+    calculate();
+    if(rightAnswers > count /2 ){
+      close(`htmlpages/exam.html`);
+      open("../htmlpages/passExam.html"); 
+    }else{
+      close(`htmlpages/exam.html`);
+      open("../htmlpages/failExam.html");
+    }
+  })
 }
-
+//&& rightAnswers < count || rightAnswers === count
 
