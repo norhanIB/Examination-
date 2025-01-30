@@ -12,6 +12,15 @@ let mailError = document.querySelector(".mailError")
 let passError = document.querySelector(".passError")
 let confirmPassError = document.querySelector(".confirmPassError")
 
+// history.pushState(null, null, location.href);
+// window.onpopstate = function () {
+//     history.go(1);
+// };
+
+// if (localStorage.getItem("signedUp")) {
+//     window.location.href = "../htmlpages/sign-in.html"; // إعادة التوجيه إلى تسجيل الدخول
+// }
+
 form.addEventListener("submit", function(e){
     let fError = fnameValidation()
     let lError = lnameValidation()
@@ -25,7 +34,7 @@ form.addEventListener("submit", function(e){
     localStorage.setItem("Lname",lname.value)
     localStorage.setItem("Email",email.value)
     localStorage.setItem("Password",password.value) }
-    handleSignUpSuccess()
+    localStorage.setItem("signedUp", "true"); 
     
 }
 )
@@ -61,6 +70,9 @@ function mailValidation(e){
     }else if(!mailPattern.test(email.value)){
         mailError.innerHTML = "invalid mail address"
         return false;
+    }else if(email.value == localStorage.getItem("Email")){
+        mailError.innerHTML = "This Mail is Olready Exist"
+        return false;
     }
     mailError.style.display = "none";
     return true;
@@ -71,7 +83,7 @@ function passwordValidation(e){
         passError.innerHTML = "This field is required";
         return false;
     }else if(!passwordPattern.test(password.value)){
-        passError.innerHTML = "password requires at least one uppercase letter,</br>at least one lowercase letter, at least one special character</br>and max 8 characters"
+        passError.innerHTML = "requires at least one uppercase letter,</br>one lowercase letter,one special character</br>and max length is 8"
         return false;
     }
     passError.style.display = "none";
@@ -91,20 +103,20 @@ function confirmpassValidation(e){
     return true;
 }
 
-///لما يعمل ساين اب ميعرفش يرجع تاني 
-window.onload = function () {
+// ///لما يعمل ساين اب ميعرفش يرجع تاني 
+// window.onload = function () {
     
-    if (localStorage.getItem('registered') === 'true') {
+//     if (localStorage.getItem('registered') === 'true') {
     
-        window.location.href = '../htmlpages/login.html';
-    }
-};
+//         window.location.href = '../htmlpages/login.html';
+//     }
+// };
 
 
-function handleSignUpSuccess() {
-console.log("hello");
+// function handleSignUpSuccess() {
+// console.log("hello");
 
-    localStorage.setItem('registered', 'true');
+//     localStorage.setItem('registered', 'true');
 
-    window.location.href = '../htmlpages/login.html';
-}
+//     window.location.href = '../htmlpages/login.html';
+// }

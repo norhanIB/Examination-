@@ -6,12 +6,16 @@ let prev = document.querySelector(".prev")
 let showCount = document.querySelector(".count span")
 let timer = document.querySelector(".timer")
 let submitBtn = document.querySelector(".submit")
+let flag=document.querySelector(".flag")
+let filflag=document.querySelector(".fillflag")
+let icon=document.querySelector(".icon")
 
 let currentIndex = 0;
 let rightAnswers = 0;
 let result;
 let userAnswer = [];
-let questionUser = []
+let questionUser = [];
+let flaggedQuestions = [];
 
 fetch('../frontend_questions.json')
 .then(response => response.json()  )
@@ -25,6 +29,13 @@ fetch('../frontend_questions.json')
 
   //display Question
   displayQuestion(questionUser[currentIndex]) 
+
+  //flag func
+  icon.addEventListener("click", function () {
+    // console.log(questionUser[currentIndex]);
+      //  updateFlaggedList(currentIndex)
+     toggleFlag(currentIndex);
+  });
 
   //next button
   nxt.addEventListener("click", function(){
@@ -50,7 +61,8 @@ fetch('../frontend_questions.json')
   
   //submit
   submitExam(questionCount);
-}).catch(()=>document.write(`<h1> error loading data</h1>`))
+})
+// .catch(()=>document.write(`<h1> error loading data</h1>`))
 
 //display data (Q&A)
 function displayQuestion(questions ){
@@ -91,6 +103,9 @@ function displayQuestion(questions ){
         radio.checked = true;
       }
     });
+    console.log("mom");
+    
+    checkflag(currentIndex);
 }
 //Calc Right Answers
 function calculate () {
@@ -161,3 +176,63 @@ function submitExam(count){
 }
 //&& rightAnswers < count || rightAnswers === count
 
+////flag function
+// check if Q in list or not in the array
+function toggleFlag(questionx) {
+  // console.log(questionId);
+    
+  filflag.classList.toggle('hidden');
+  flag.classList.toggle('hidden');
+  const index = flaggedQuestions.indexOf(questionx);
+  console.log(index);
+  
+  if (index > -1) {
+    flaggedQuestions.splice(questionx, 1);
+  } else {
+    flaggedQuestions.push(questionx);
+  }
+  console.log(flaggedQuestions);//output list
+  
+  //add to list 
+  updateFlaggedList(); 
+}
+
+function updateFlaggedList() {
+  // console.log(question);
+  const flaggedList = document.getElementById('flagged-list');
+  flaggedList.innerHTML = '';
+// console.log(flaggedList);
+
+  flaggedQuestions.forEach((questionx) => {
+  // console.log(question);
+    const listItem = document.createElement('li');
+    //  console.log(flaggedQuestions[currentIndex]);
+    listItem.textContent = `Question ${questionx+1}`;
+    listItem.classList.add('listitem')
+    ////////////////////
+    listItem.addEventListener("click",function() {
+      examQuestions.innerHTML = "";
+      examAnwers.innerHTML = ""; 
+      displayQuestion(questionUser[questionx]) 
+      console.log(questionx);
+      
+    })
+   flaggedList.appendChild(listItem);
+   console.log(flaggedList);
+   
+  });
+}
+
+ function checkflag(currentIndex) { 
+  if (flaggedQuestions.includes(currentIndex)) {
+    console.log(currentIndex);
+    
+    flag.classList.add('hidden'); 
+    filflag.classList.remove('hidden');
+  } else {
+    console.log(currentIndex);
+    
+    flag.classList.remove('hidden'); 
+    filflag.classList.add('hidden');
+  }
+}

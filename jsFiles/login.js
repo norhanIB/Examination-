@@ -10,9 +10,15 @@ let passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W]).{1,8}$/ ;
 let emailLocal = localStorage.getItem("Email")
 let passwordLocal = localStorage.getItem("Password")
 
+// history.pushState(null, null, location.href);
+// window.onpopstate = function () {
+//     history.go(1);
+// };
 
 form.addEventListener("submit", function(e){
+    
     e.preventDefault();
+   
     let inputM = mailValidation(e);
     let inputP = passValidation(e);
     // let isvisible = false;
@@ -23,34 +29,14 @@ form.addEventListener("submit", function(e){
         console.log(passwordLocal);
         
         if(mail.value === emailLocal && pass.value === passwordLocal){
-            // isvisible = true;
-            console.log("rew");
+            localStorage.setItem("isLoggedIn", "true"); // حفظ حالة تسجيل الدخول
             window.location.href = '../htmlpages/home.html';
-
-         return true;
-            
+            return true;
         }else{
-            
-            // isvisible = false
             error.innerHTML = "incorect mail or password";
         }
         
     }
-
-    // return isvisible;
-    // if(mailValidation(e) && passValidation(e)){
-    //     console.log(mail.value);
-    //         console.log(emailLocal);
-    //     if(mail.value !== emailLocal && pass.value !== passwordLocal){
-    //         console.log("mada");
-            
-    //         // console.log(mail.value);
-    //         // console.log(emailLocal);
-            
-            
-    //     alert("incorect mail or pass")
-    // }}
-    
 })
 
 function mailValidation(e){
