@@ -22,20 +22,13 @@ fetch('../frontend_questions.json')
 .then(question => {
   let questionCount = question.length
   //Timer
-  // countDwon(600, 20);
+  countDwon(240, 10);
 
   // Random
   questionUser =  suffle(question);
 
   //display Question
   displayQuestion(questionUser[currentIndex]) 
-
-  //flag func
-  icon.addEventListener("click", function () {
-    // console.log(questionUser[currentIndex]);
-      //  updateFlaggedList(currentIndex)
-     toggleFlag(currentIndex);
-  });
 
   //next button
   nxt.addEventListener("click", function(){
@@ -54,18 +47,23 @@ fetch('../frontend_questions.json')
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = "";  
       displayQuestion(questionUser[currentIndex])
-      console.log(userAnswer);
-      
     }
   })
-  
+
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("flag")) {
+        flagQuestion(currentIndex, e.target);
+    } else if (e.target.classList.contains("fillflag")) {
+        unFlagged(currentIndex, e.target);
+    }
+});
   //submit
   submitExam(questionCount);
-})
-// .catch(()=>document.write(`<h1> error loading data</h1>`))
+}).catch(()=>document.write(`<h1> error loading data</h1>`))
 
 //display data (Q&A)
 function displayQuestion(questions ){
+  console.log(currentIndex)
    showCount.innerHTML = currentIndex+1;
     //question
     let questionTitle = document.createElement("h2")
@@ -91,8 +89,6 @@ function displayQuestion(questions ){
       label.htmlFor = `${index}`
       let labelText = document.createTextNode(`${option}`);      
       label.append(labelText);
-      console.log(radio.dataset.answer)
-      console.log(index)
       radio.setAttribute('onclick' , `saveAnswer(${currentIndex} , '${radio.dataset.answer}')`);
       
       answerDiv.append(radio)
@@ -102,11 +98,10 @@ function displayQuestion(questions ){
       if(userAnswer[currentIndex] === option){
         radio.checked = true;
       }
-    });
-    console.log("mom");
-    
+    });    
     checkflag(currentIndex);
 }
+
 //Calc Right Answers
 function calculate () {
   for (let i = 0; i < userAnswer.length; i++) {
@@ -149,13 +144,12 @@ function suffle(questions){
     if(!randomeIndexCheck.has(randomIndex)){
       shuffleQuestion.push(questions[randomIndex]) 
       randomeIndexCheck.add(randomIndex);
-      console.log(randomIndex);
-      
       index++;
     }  
   }
   return shuffleQuestion;
 }
+
 //Save Answers
 function saveAnswer(index , answer){
   userAnswer[index] = answer;
@@ -174,64 +168,67 @@ function submitExam(count){
     }
   })
 }
-//&& rightAnswers < count || rightAnswers === count
 
 ////flag function
 // check if Q in list or not in the array
-function toggleFlag(questionx) {
-  // console.log(questionId);
-    
-  filflag.classList.toggle('hidden');
-  flag.classList.toggle('hidden');
-  const index = flaggedQuestions.indexOf(questionx);
-  console.log(index);
-  
-  if (index > -1) {
-    flaggedQuestions.splice(questionx, 1);
-  } else {
-    flaggedQuestions.push(questionx);
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("flag")) {
+      flagQuestion(currentIndex, e.target);
+  } else if (e.target.classList.contains("fillflag")) {
+      unFlagged(currentIndex, e.target);
   }
-  console.log(flaggedQuestions);//output list
+});
+
+function flagQuestion(current, element) {
+  if (!flaggedQuestions.includes(current)) {
+      flaggedQuestions.push(current);
+      let flag = element;
+      let filflag = flag.nextElementSibling; 
+      
+      if (filflag) {
+          filflag.classList.remove('hidden');
+          flag.classList.add('hidden');
+      }
+      updateFlaggedList()
+  }
+}
+
+function unFlagged(current, element) {
+  flaggedQuestions = flaggedQuestions.filter(ele => ele !== current);
+  let filflag = element;
+  let flag = filflag.previousElementSibling; 
   
-  //add to list 
-  updateFlaggedList(); 
+  if (flag) {
+      filflag.classList.add('hidden');
+      flag.classList.remove('hidden');
+  }
+  updateFlaggedList()
 }
 
 function updateFlaggedList() {
-  // console.log(question);
   const flaggedList = document.getElementById('flagged-list');
   flaggedList.innerHTML = '';
-// console.log(flaggedList);
 
   flaggedQuestions.forEach((questionx) => {
-  // console.log(question);
     const listItem = document.createElement('li');
-    //  console.log(flaggedQuestions[currentIndex]);
-    listItem.textContent = `Question ${questionx+1}`;
+    listItem.textContent = `Q ${questionx+1}`;
     listItem.classList.add('listitem')
-    ////////////////////
+
     listItem.addEventListener("click",function() {
       examQuestions.innerHTML = "";
       examAnwers.innerHTML = ""; 
-      displayQuestion(questionUser[questionx]) 
-      console.log(questionx);
-      
+      currentIndex = questionx
+      displayQuestion(questionUser[currentIndex]) 
     })
    flaggedList.appendChild(listItem);
-   console.log(flaggedList);
-   
   });
 }
 
- function checkflag(currentIndex) { 
+function checkflag(currentIndex) { 
   if (flaggedQuestions.includes(currentIndex)) {
-    console.log(currentIndex);
-    
     flag.classList.add('hidden'); 
     filflag.classList.remove('hidden');
   } else {
-    console.log(currentIndex);
-    
     flag.classList.remove('hidden'); 
     filflag.classList.add('hidden');
   }

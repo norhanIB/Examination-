@@ -1,3 +1,4 @@
+
 let form = document.forms[0]
 let fname = document.querySelector('.Fname');
 let lname = document.querySelector('.Lname');
@@ -5,7 +6,7 @@ let email = document.querySelector('.email');
 let password = document.querySelector('.password');
 let confirmpass = document.querySelector(".confirmpassword")
 let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-let passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[\W]).{1,8}$/ ;
+let passwordPattern = /^[a-zA-Z0-9!@#$%^&*()_+]{8}$/;
 let fnameError = document.querySelector(".fnameError")
 let lnameError = document.querySelector(".lnameError")
 let mailError = document.querySelector(".mailError")
@@ -22,101 +23,106 @@ let confirmPassError = document.querySelector(".confirmPassError")
 // }
 
 form.addEventListener("submit", function(e){
-    let fError = fnameValidation()
-    let lError = lnameValidation()
-    let mError = mailValidation()
-    let pError = passwordValidation()
-    let cpError = confirmpassValidation()
-
-    if(!(fError && lError && mError && pError && cpError)){
-       e.preventDefault()
-    }else{localStorage.setItem("Fname",fname.value)
-    localStorage.setItem("Lname",lname.value)
-    localStorage.setItem("Email",email.value)
-    localStorage.setItem("Password",password.value) }
-    localStorage.setItem("signedUp", "true"); 
+    e.preventDefault();
+    fnameValidation(e);
+    lnameValidation(e);
+    mailValidation(e);
+    passwordValidation(e);
+    confirmpassValidation(e);
     
-}
+    if(fname.value && lname.value && email.value && password.value && confirmpass.value){
+        localStorage.setItem("Fname",fname.value)
+        localStorage.setItem("Lname",lname.value)
+        localStorage.setItem("Email",email.value)
+        localStorage.setItem("Password",password.value) }
+        localStorage.setItem("signedUp", "true");
+    }, 
 )
 
-function fnameValidation(e){
-    if(fname.value == ""){
-        fnameError.innerHTML = "This field is required";
-        return false;
-    }else if(isFinite(fname.value)){
-        fnameError.innerHTML = "This field required characters only";
-        return false;
-    }
-    fnameError.style.display = "none";
-    return true;
+fname.addEventListener("blur" , fnameValidation)
+    function fnameValidation(e){
+        if(fname.value == ""){
+
+            fname.style.border = "2px solid #ff3300";
+            fnameError.innerHTML = "This field is required";
+
+        }else if(isFinite(fname.value)){
+            fname.style.border = "2px solid #ff3300";
+            fnameError.innerHTML = "This field required characters only";
+
+        }else{
+            fname.style.border = "2px solid #5a57f1";
+            fnameError.style.display = "none";
+        }
+        
 }
 
-function lnameValidation(e){
-    if(lname.value == ""){
-        lnameError.innerHTML = "This field is required";
-        return false;
-    }else if(isFinite(lname.value)){
-        lnameError.innerHTML = "This field required characters only";
-        return false;
-    }
-    lnameError.style.display = "none";
-    return true;
+lname.addEventListener("blur", lnameValidation)
+    function lnameValidation(e){
+        if(lname.value == ""){
+            lname.style.border = "2px solid #ff3300";
+            lnameError.innerHTML = "This field is required";
+
+        }else if(isFinite(lname.value)){
+            lname.style.border = "2px solid #ff3300";
+            lnameError.innerHTML = "This field required characters only";
+
+        }else{
+            lname.style.border = "2px solid #5a57f1";
+            lnameError.style.display = "none";
+        }
 }
 
-function mailValidation(e){
-    if(email.value == ""){
-        mailError.innerHTML = "This field is required";
-        return false;
-    }else if(!mailPattern.test(email.value)){
-        mailError.innerHTML = "invalid mail address"
-        return false;
-    }else if(email.value == localStorage.getItem("Email")){
-        mailError.innerHTML = "This Mail is Olready Exist"
-        return false;
-    }
-    mailError.style.display = "none";
-    return true;
+email.addEventListener("blur", mailValidation)
+    function mailValidation(e){
+        if(email.value == ""){
+            email.style.border = "2px solid #ff3300";
+            mailError.innerHTML = "This field is required";
+
+        }else if(!mailPattern.test(email.value)){
+            email.style.border = "2px solid #ff3300";
+            mailError.innerHTML = "invalid mail address";
+
+        }else if(email.value == localStorage.getItem("Email")){
+            email.style.border = "2px solid #ff3300";
+            mailError.innerHTML = "This Mail is Olready Exist";
+
+        }else{
+            email.style.border = "2px solid #5a57f1";
+            mailError.style.display = "none";
+        }
 }
 
-function passwordValidation(e){
-    if(password.value == ""){
-        passError.innerHTML = "This field is required";
-        return false;
-    }else if(!passwordPattern.test(password.value)){
-        passError.innerHTML = "requires at least one uppercase letter,</br>one lowercase letter,one special character</br>and max length is 8"
-        return false;
-    }
-    passError.style.display = "none";
-    return true;
+password.addEventListener("blur", passwordValidation)
+    function passwordValidation(e){
+        if(password.value == ""){
+            password.style.border = "2px solid #ff3300";
+            passError.innerHTML = "This field is required";
+
+        }else if(!passwordPattern.test(password.value)){
+            password.style.border = "2px solid #ff3300";
+            passError.innerHTML = "require 8 characters"
+
+        }else{
+            password.style.border = "2px solid #5a57f1";
+            passError.style.display = "none";
+        }
 }
 
-function confirmpassValidation(e){
-    if(confirmpass.value == ""){
-        confirmPassError.innerHTML = "This field is required";
-        return false;
-    }else
-    if(confirmpass.value !== password.value ){
-        confirmPassError.innerHTML = "Password dosn't match"
-        return false;
-    }
-    confirmPassError.style.display = "none";
-    return true;
+confirmpass.addEventListener("blur", confirmpassValidation)
+    function confirmpassValidation(e){
+        if(confirmpass.value == ""){
+            confirmpass.style.border = "2px solid #ff3300";
+            confirmPassError.innerHTML = "This field is required";
+
+        }else
+        if(confirmpass.value !== password.value ){
+            confirmpass.style.border = "2px solid #ff3300"
+            confirmPassError.innerHTML = "Password dosn't match"
+
+        }else{
+            confirmpass.style.border = "2px solid #5a57f1";
+            confirmPassError.style.display = "none";
+        }
 }
 
-// ///لما يعمل ساين اب ميعرفش يرجع تاني 
-// window.onload = function () {
-    
-//     if (localStorage.getItem('registered') === 'true') {
-    
-//         window.location.href = '../htmlpages/login.html';
-//     }
-// };
-
-
-// function handleSignUpSuccess() {
-// console.log("hello");
-
-//     localStorage.setItem('registered', 'true');
-
-//     window.location.href = '../htmlpages/login.html';
-// }

@@ -1,50 +1,101 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #e3eaf3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 600px;
-  }
-  .passimg{
-    width: 300px;
-  }
-  h1{
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: #ff8b00;
-  }
-  h2{
-    font-size: 18px;
-    color: #666;
-  }
-  .home-button {
-    text-decoration: none;
-    background-color: #6c63ff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 600px;
+  animation: fadeIn 1s ease-in-out;
 
-  .home-button:hover {
-    background-color: #5750d1;
+}
+
+.passimg{
+  width: 60%;
+  animation: pulse 2s forwards;
+}
+
+h1{
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 5px;
+  color: #ff8b00;
+  animation: fadeIn 1s ease-in-out 0.3s forwards;
+}
+
+.keep {
+  color: #5046e5;
+}
+
+h2{
+  font-weight: bold;
+  font-size: 20px;
+  color: #666;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+}
+
+.home-button {
+  margin-top: 15px;
+  text-decoration: none;
+  background: linear-gradient(90deg, #6c63ff, #5046e5);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 1.2s forwards;
+}
+
+.home-button:hover {
+  background: linear-gradient(90deg, #5046e5, #3a2fc7);
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

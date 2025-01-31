@@ -1,46 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
-  <link rel="stylesheet" href="../cssFiles/stylesfor3page.css">
+  <link rel="stylesheet" href="../cssFiles/signup.css">
 </head>
 <body>
   <section class="signup-container">
     <div class="form-container">
       <h1>Create an Account</h1>
-      <p>Join us to start your online exam journey.</p>
       <form action="login.html" class="signup-form">
-        <label for="Firstname">Firstname</label>
-        <input type="text"  name="Firstname" placeholder="Enter your Firstname"  class="Fname">
-        <span class="fnameError" style="color: red;"></span>
 
-        <label for="Lastname">Lastname</label>
-        <input type="text"  name="Lastname" placeholder="Enter your Lastname"  class="Lname" >
-        <span class="lnameError" style="color: red;"></span>
-        
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email"  class="email" >
-        <span class="mailError" style="color: red;"></span>
-        
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password"  class="password" >
-        <span class="passError" style="color: red;"></span>
+        <div class="blockinput">
+          <label for="Firstname">Firstname</label>
+          <input type="text"  name="Firstname" placeholder="Enter your Firstname"  class="Fname right error">
+          <span class="fnameError" style="color: red;"></span>
+        </div>
 
-        <label for="password"> Confirm Password</label>
-        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" class="confirmpassword" >
-        <span class="confirmPassError" style="color: red;"></span>
-        
+        <div class="blockinput">
+          <label for="Lastname">Lastname</label>
+          <input type="text"  name="Lastname" placeholder="Enter your Lastname"  class="Lname right error" >
+          <span class="lnameError" style="color: red;"></span>
+        </div>
+          
+        <div class="blockinput">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter your email"  class="email right error" >
+          <span class="mailError" style="color: red;"></span>
+        </div>
+          
+        <div class="blockinput">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password"  class="password right error" >
+          <span class="passError" style="color: red;"></span>
+        </div>
+          
+        <div class="blockinput">
+          <label for="password"> Confirm Password</label>
+          <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm your password" class="confirmpassword right error" >
+          <span class="confirmPassError" style="color: red;"></span>
+        </div>
         <button type="submit" class="btn-signup">Sign Up</button>
       </form>
-    
     </div>
+
     <div class="illustration">
-      <div class="circle orange"></div>
-      <div class="rectangle purple"></div>
-      <div class="rectangle black"></div>
-      <div class="circle yellow"></div>
+      <p>Join us to start your online exam journey.</p>
+      <div class="sidecontainer">
+          <div class="circle orange"></div>
+          <div class="rectangle purple"></div>
+          <div class="rectangle black"></div>
+          <div class="circle yellow"></div>
+      </div>
     </div>
   </section>
   <script src="../jsFiles/signup.js"></script>

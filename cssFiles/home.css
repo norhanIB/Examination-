@@ -1,0 +1,145 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.illustration {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.right{
+    border-color:#5a57f1 ;
+}
+.error{
+    border:2px solid #ff3300 ;
+}
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: move 2s infinite alternate;
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(30px);
+    }
+}
+
+.rectangle {
+    width: 60px;
+    height: 120px;
+    border-radius: 10px;
+}
+
+.orange {
+    background-color: #ff8b00;
+}
+
+.purple {
+    background-color: #5f5ce0;
+}
+
+.black {
+    background-color: #000;
+}
+
+.yellow {
+    background-color: #ffd700;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 10px 20px;
+    background-color: white;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #5f5ce0;
+}
+
+.get-started {
+    background-color: #5f5ce0;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* Main Section */
+section {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Content Section */
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 40px;
+    text-align: left;
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: #928e8e;
+   text-align: center;
+}
+
+.btn-signup{
+    margin-top: 10%;
+    background-color: #5f5ce0;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+} 

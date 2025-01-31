@@ -4,34 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="../cssFiles/stylesfor3page.css">
+  <link rel="stylesheet" href="../cssFiles/login.css">
 </head>
 <body>
   <!-- method="POST" -->
   <section class="login-container">
-     <div class="form-container">
+    <div class="form-container">
       <h1>Welcome Back!</h1>
-      <p>Log in to access your account and start your exam.</p>
+      <p>Log in to access your account</p>
       <form action="home.html"  class="login-form">  
         <span class="Error" style="color: red;"></span>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email">
-        <span class="mailError" style="color: red;"></span>
-        <label for="password">Password</label>
-         <input type="password" id="password" name="password" placeholder="Enter your password" >
-         <span class="passError" style="color: red;"></span>
-            <button type="submit" class="btn-login">Login</button>
-      </form>
 
-        </div> 
-        <div class="illustration">
-          <div class="circle orange"></div>
-          <div class="rectangle purple"></div>
-          <div class="rectangle black"></div>
-          <div class="circle yellow"></div>
+        <div class="blockinput">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter your email">
+          <span class="mailError" style="color: red;"></span>
         </div>
+        
+        <div class="blockinput">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" >
+          <span class="passError" style="color: red;"></span>
+        </div>
+
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+    </div> 
+    <div class="illustration">
+      <p>Back To Your Journey.</p>
+      <div class="sidecontainer">
+        <div class="circle orange"></div>
+        <div class="rectangle purple"></div>
+        <div class="rectangle black"></div>
+        <div class="circle yellow"></div>
+      </div>
+    </div>
   </section>
-       <script src="../jsFiles/login.js"></script>
-  </body>
+    <script src="../jsFiles/login.js"></script>
+</body>
 </html> 
 

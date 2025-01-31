@@ -7,23 +7,14 @@
 <link rel="stylesheet" href="../cssFiles/timeout.css">
 </head>
 <body>
-  <!-- <div class="logo">logo</div> -->
   <div class="container">
-    <div class="message">
-      <h1>Sorry, your time is out</h1>
-      <p>The allowed time for this exam has expired try again</p>
-    </div>
-    <div class="score">Your Score: <span id="score">0</span></div>
-    <div class="clock">
-      <span>00:00</span>
-    </div>
+    <img src="../imgs/Deadline-pana (1).svg" alt="">
+      <div class="message">
+        <h1>Sorry <span id="username"></span>, your time is out</h1>
+        <p>The allowed time for this exam has expired try again</p>
+      </div>
     <a href="home.html" class="home-button">Go to Home</a>
   </div>
-
-  <script>
-
-    const score = 85;
-    document.getElementById('score').textContent = score;
-  </script>
+  <script src="../jsFiles/timeout.js"></script>
 </body>
 </html>
