@@ -143,3 +143,21 @@ section {
     border: none;
     cursor: pointer;
 } 
+@media (max-width: 768px) {
+    .illustration {
+        display: none;
+    }
+
+    .content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .btn-signup {
+        width: 100%;
+    }
+}

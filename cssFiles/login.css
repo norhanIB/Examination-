@@ -204,7 +204,29 @@ background-color: #ffd700;
 
 
 
+@media (max-width: 768px) {
+    .illustration {
+        display: none;
+    }
 
+    .form-container {
+        width: 100%;
+        padding: 30px;
+    }
+
+    .login-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content {
+        text-align: center;
+    }
+
+    .btn-signup {
+        width: 100%;
+    }
+}
 
 
 
