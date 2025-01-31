@@ -7,8 +7,9 @@ let error = document.querySelector(".Error")
 let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 let passwordPattern = /^[a-zA-Z0-9!@#$%^&*()_+]{8}$/;
 
-let emailLocal = localStorage.getItem("Email")
-let passwordLocal = localStorage.getItem("Password")
+// let emailLocal = localStorage.getItem("User")
+// let passwordLocal = localStorage.getItem("Password")
+let users = JSON.parse(localStorage.getItem("Users")) ;
 
 // history.pushState(null, null, location.href);
 // window.onpopstate = function () {
@@ -19,15 +20,22 @@ form.addEventListener("submit", function(e){
     e.preventDefault();
     mailValidation(e);
     passValidation(e);
-
-    if(mail.value && pass.value){
-        if(!(mail.value === emailLocal && pass.value === passwordLocal)){
-            error.innerHTML = "incorect mail or password";
-        }else{
-            localStorage.setItem("isLoggedIn", "true");
-            window.location.href = '../htmlpages/home.html'; 
-        }
+    let foundmail=users.find(item =>item.mail===user.email);
+    if(foundmail){
+        let index=users.index
     }
+    let foundpass=users.find(item =>item.pass===user.email);
+
+    // if(mail.value && pass.value){
+    //     if(!(mail.value === emailLocal && pass.value === passwordLocal)){
+    //         console.log(emailLocal);
+            
+    //         error.innerHTML = "incorect mail or password";
+    //     }else{
+    //         localStorage.setItem("isLoggedIn", "true");
+    //         window.location.href = '../htmlpages/home.html'; 
+    //     }
+    // }
 })
 
 mail.addEventListener("blur", mailValidation)
