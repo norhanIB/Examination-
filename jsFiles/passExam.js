@@ -1,9 +1,6 @@
 let score = document.getElementById("score");
 let username = document.getElementById("username");
 
-username.innerText = localStorage.getItem("Fname");
+username.innerText = localStorage.getItem("userName");
 score.innerText = localStorage.getItem("grad");
 
-document.addEventListener("click" , function () {
-    document.querySelector("audio").play()
-})
