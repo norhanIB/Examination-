@@ -20,7 +20,7 @@ form.addEventListener("submit", function(e){
         if(!(loginUser)){
             error.innerHTML = "incorect mail or password";
         }else{
-            window.location.replace('../htmlpages/home.html'); 
+            window.location.replace('../html_pages/home.html'); 
             localStorage.setItem("userName" , `${loginUser.fname} ${loginUser.lname}`)
         }
     }

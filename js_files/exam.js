@@ -156,11 +156,11 @@ function submitExam(count){
     submitBtn.addEventListener("click", function(){
     calculate();
     if(rightAnswers >= count /2 ){
-      close(`htmlpages/exam.html`);
-      open("../htmlpages/pass_exam.html"); 
+      close(`html_pages/exam.html`);
+      open("../html_pages/pass_exam.html"); 
     }else{
-      close(`htmlpages/exam.html`);
-      open("../htmlpages/fail_exam.html");
+      close(`html_pages/exam.html`);
+      open("../html_pages/fail_exam.html");
     }
   })
 }
