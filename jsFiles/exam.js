@@ -9,6 +9,7 @@ let submitBtn = document.querySelector(".submit")
 let flag=document.querySelector(".flag")
 let filflag=document.querySelector(".fillflag")
 let icon=document.querySelector(".icon")
+// let divoption = document.querySelector(".divoption")
 
 let currentIndex = 0;
 let rightAnswers = 0;
@@ -22,7 +23,7 @@ fetch('../frontend_questions.json')
 .then(question => {
   let questionCount = question.length
   //Timer
-  countDwon(240, 10);
+  // countDwon(70, 10);
 
   // Random
   questionUser =  suffle(question);
@@ -63,7 +64,6 @@ fetch('../frontend_questions.json')
 
 //display data (Q&A)
 function displayQuestion(questions ){
-  console.log(currentIndex)
    showCount.innerHTML = currentIndex+1;
     //question
     let questionTitle = document.createElement("h2")
@@ -106,7 +106,6 @@ function displayQuestion(questions ){
 function calculate () {
   for (let i = 0; i < userAnswer.length; i++) {
     if (userAnswer[i] === questionUser[i].answer) {
-      console.log(userAnswer[i] === questionUser[i].answer);
       rightAnswers++
     }
   }
@@ -115,7 +114,6 @@ function calculate () {
 
 //Timer
 function countDwon(duration, count){
-  if(currentIndex < count){
     let minutes;
     let seconds;
     timerInterval = setInterval(() => {
@@ -124,14 +122,12 @@ function countDwon(duration, count){
       minutes = minutes < 10 ? `0${minutes}` : minutes;
       seconds = seconds < 10 ? `0${seconds}` : seconds;
       timer.innerHTML = `${minutes}:${seconds}`;
-
-      if(--duration < 0 ){
+      
+      if(--duration <= 0 ){
         clearInterval(timerInterval);
-        close(`htmlpages/exam.html`);
-        open("../htmlpages/timeout.html");
+        window.location.replace("timeout.html");
       }
     }, 1000);
-  }
 }
 
 //Randomization
@@ -159,7 +155,7 @@ function saveAnswer(index , answer){
 function submitExam(count){
     submitBtn.addEventListener("click", function(){
     calculate();
-    if(rightAnswers > count /2 ){
+    if(rightAnswers >= count /2 ){
       close(`htmlpages/exam.html`);
       open("../htmlpages/passExam.html"); 
     }else{
@@ -171,14 +167,6 @@ function submitExam(count){
 
 ////flag function
 // check if Q in list or not in the array
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("flag")) {
-      flagQuestion(currentIndex, e.target);
-  } else if (e.target.classList.contains("fillflag")) {
-      unFlagged(currentIndex, e.target);
-  }
-});
-
 function flagQuestion(current, element) {
   if (!flaggedQuestions.includes(current)) {
       flaggedQuestions.push(current);

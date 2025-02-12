@@ -36,12 +36,17 @@ button {
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .headQuestion {
-  margin-top: 1%;
+  /* margin-top: 1%; */
   display: flex;
   justify-content: space-between;
+ 
 }
 
 .icon{
@@ -65,9 +70,10 @@ button {
 }
 
 .answers {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   padding-left: 10px;
   margin-bottom: 20px;
+  height: 20%;
 }
 
 .label{
@@ -198,6 +204,12 @@ input[type='radio']:checked + label {
   border-radius: 10px;
   display: inline-block;
 }
+
+/* .divoption {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+} */
 
 @media (max-width: 500px){
   .exambackground {
