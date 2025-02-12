@@ -33,7 +33,7 @@ form.addEventListener("submit", function(e){
           if (!found){
             users.push(user);
             localStorage.setItem("Users", JSON.stringify(users)),
-            window.location.replace("./login.html")
+            window.location.replace("./htmlpages/login.html")
           }
         }
 })
