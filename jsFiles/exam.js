@@ -9,7 +9,7 @@ let submitBtn = document.querySelector(".submit")
 let flag=document.querySelector(".flag")
 let filflag=document.querySelector(".fillflag")
 let icon=document.querySelector(".icon")
-// let divoption = document.querySelector(".divoption")
+
 
 let currentIndex = 0;
 let rightAnswers = 0;
@@ -157,10 +157,10 @@ function submitExam(count){
     calculate();
     if(rightAnswers >= count /2 ){
       close(`htmlpages/exam.html`);
-      open("../htmlpages/passExam.html"); 
+      open("../htmlpages/pass_exam.html"); 
     }else{
       close(`htmlpages/exam.html`);
-      open("../htmlpages/failExam.html");
+      open("../htmlpages/fail_exam.html");
     }
   })
 }
